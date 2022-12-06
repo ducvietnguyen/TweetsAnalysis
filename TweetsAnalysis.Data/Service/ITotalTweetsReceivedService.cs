@@ -1,13 +1,14 @@
 ﻿using TweetsAnalysis.Data.Models;
 
-namespace TweetsAnalysis.Data.Repository
+namespace TweetsAnalysis.Data.Service
 {
-    public interface ITotalTweetsReceivedRepo
+    public interface ITotalTweetsReceivedService
     {
         Task<bool> SaveChanges();
         Task<TotalTweetsReceived> GetTotalTweetsReceived();
         Task CreateTotalTweetsReceived(TotalTweetsReceived entity);
 
         Task UpdateTotalTweetsReceived(TotalTweetsReceived updateEntity);
+        Task CalculateTotalTweetsReceived();
     }
 }

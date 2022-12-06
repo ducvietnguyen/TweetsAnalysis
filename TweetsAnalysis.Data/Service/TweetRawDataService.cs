@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TweetsAnalysis.Data.Models;
 
-namespace TweetsAnalysis.Data.Repository
+namespace TweetsAnalysis.Data.Service
 {
-    public class TweetRawDataRepo : ITweetRawDataRepo
+    public class TweetRawDataService : ITweetRawDataService
     {
         private readonly TweetsAnalysisDbContext _context;
 
-        public TweetRawDataRepo(TweetsAnalysisDbContext context)
+        public TweetRawDataService(TweetsAnalysisDbContext context)
         {
             _context = context;
         }
@@ -20,7 +20,7 @@ namespace TweetsAnalysis.Data.Repository
 
             await _context.TweetRawDatas.AddAsync(tweetRowData);
         }
-        public async Task CreateMultiTweetRowDatas(List< TweetRawData> tweetRowDatas)
+        public async Task CreateMultiTweetRowDatas(List<TweetRawData> tweetRowDatas)
         {
             if (tweetRowDatas == null)
             {
@@ -40,14 +40,14 @@ namespace TweetsAnalysis.Data.Repository
         {
             return await _context.TweetRawDatas.Where(p => p.DateTimeTweet == dateTime).ToListAsync();
         }
-        public async Task<IEnumerable<TweetRawData>> GetTweetRowDataFromDate(DateTime dateTime)
+        public async Task<IEnumerable<TweetRawData>> GetTweetRowDataFromDate(DateTime fromTime, bool excludeFromDate)
         {
-            return await _context.TweetRawDatas.Where(p => p.DateTimeTweet >= dateTime).ToListAsync();
+            return await _context.TweetRawDatas.AsNoTracking().Where(p => excludeFromDate ? p.DateTimeTweet > fromTime : p.DateTimeTweet >= fromTime).ToListAsync();
         }
 
         public async Task<IEnumerable<TweetRawData>> GetTweetRowDataFromDateToDate(DateTime dateTimeFrom, DateTime dateTimeTo)
         {
-            return await _context.TweetRawDatas.Where(p => p.DateTimeTweet >= dateTimeFrom && p.DateTimeTweet <= dateTimeTo).ToListAsync();
+            return await _context.TweetRawDatas.AsNoTracking().Where(p => p.DateTimeTweet >= dateTimeFrom && p.DateTimeTweet <= dateTimeTo).ToListAsync();
         }
 
         public async Task<bool> SaveChanges()
