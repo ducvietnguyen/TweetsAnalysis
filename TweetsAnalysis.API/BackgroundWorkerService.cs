@@ -6,7 +6,7 @@ public class BackgroundWorkerService : BackgroundService
     private readonly IAverageTweetsPerMinuteService _averageTweetsPerMinuteService;
     private readonly ITotalTweetsReceivedService _totalTweetsReceivedService;
 
-    public BackgroundWorkerService(ILogger<BackgroundService> logger, 
+    public BackgroundWorkerService(ILogger<BackgroundService> logger,
         IServiceScopeFactory factory)
     {
         _logger = logger;
@@ -23,15 +23,13 @@ public class BackgroundWorkerService : BackgroundService
 
             var now = DateTime.Now;
 
-            if (now.Hour == 0 && now.Minute == 0 && now.Second <= 5 + 1)
-            {
-                await _averageTweetsPerMinuteService.CalculateAverageTweetsPerMinuteByYesterday();
-            }
+            // Calculate the average tweets per minute from the beginning of the day till now.
+            await _averageTweetsPerMinuteService.CalculateAverageTweetsPerMinute(DateTime.Today, now);
 
-            await _averageTweetsPerMinuteService.CalculateAverageTweetsPerMinuteToday();
-
+            // Calculate total of tweets received
             await _totalTweetsReceivedService.CalculateTotalTweetsReceived();
 
+            // Run the background worker each 5 second.
             await Task.Delay(5000, stoppingToken);
         }
     }

@@ -9,6 +9,9 @@ namespace TweetsAnalysis.Data.Models
         [Required]
         public int TotalTweets { get; set; }
 
+        /// <summary>
+        /// The point of time that total tweets was calculated
+        /// </summary>
         [Required]
         public DateTime LatestDateCalculate { get; set; }
     }

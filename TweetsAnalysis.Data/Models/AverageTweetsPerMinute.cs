@@ -11,6 +11,6 @@ namespace TweetsAnalysis.Data.Models
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public double AverageTweets { get; set; }
+        public int AverageTweets { get; set; }
     }
 }

@@ -36,20 +36,6 @@ namespace TweetsAnalysis.Data.Service
             return await _context.TweetRawDatas.ToListAsync();
         }
 
-        public async Task<IEnumerable<TweetRawData>> GetTweetRowDataByDate(DateTime dateTime)
-        {
-            return await _context.TweetRawDatas.Where(p => p.DateTimeTweet == dateTime).ToListAsync();
-        }
-        public async Task<IEnumerable<TweetRawData>> GetTweetRowDataFromDate(DateTime fromTime, bool excludeFromDate)
-        {
-            return await _context.TweetRawDatas.AsNoTracking().Where(p => excludeFromDate ? p.DateTimeTweet > fromTime : p.DateTimeTweet >= fromTime).ToListAsync();
-        }
-
-        public async Task<IEnumerable<TweetRawData>> GetTweetRowDataFromDateToDate(DateTime dateTimeFrom, DateTime dateTimeTo)
-        {
-            return await _context.TweetRawDatas.AsNoTracking().Where(p => p.DateTimeTweet >= dateTimeFrom && p.DateTimeTweet <= dateTimeTo).ToListAsync();
-        }
-
         public async Task<bool> SaveChanges()
         {
             return (await _context.SaveChangesAsync() >= 0);
