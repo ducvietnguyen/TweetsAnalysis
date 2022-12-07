@@ -1,7 +1,7 @@
 # Tweets analysis application
 
 ## Build Requirement
-Visual Studio 20022, Net 6 Installed
+Visual Studio 2022, Net 6 Installed
 
 ## Run guide
 * Replace ClientID and ClientSecret in appsettings.json
