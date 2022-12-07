@@ -1,24 +1,25 @@
 using Microsoft.EntityFrameworkCore;
+using TweetsAnalysis.API;
+using TweetsAnalysis.API.Consumer;
 using TweetsAnalysis.Data.Models;
 using TweetsAnalysis.Data.Service;
-using TweetsAnalysis.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddHostedService<BackgroundWorkerService>();
+builder.Services.AddHostedService<CalculateBackgroundWorkerService>();
+builder.Services.AddHostedService<GetTweetBackgroundWorker>(); 
 
 builder.Services.AddDbContext<TweetsAnalysisDbContext>(opt => opt.UseInMemoryDatabase("TweetsAnalysisDatabase"));
 
-
 builder.Services.AddScoped<ITweetRawDataService, TweetRawDataService>();
-
 
 builder.Services.AddScoped<ITotalTweetsReceivedService, TotalTweetsReceivedService>();
 
 builder.Services.AddScoped<IAverageTweetsPerMinuteService, AverageTweetsPerMinuteService>();
 
+builder.Services.AddScoped<ITwitterConsumer, TwitterConsumer>();
 
 builder.Services.AddControllers();
 

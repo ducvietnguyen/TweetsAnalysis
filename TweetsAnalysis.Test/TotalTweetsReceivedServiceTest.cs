@@ -28,7 +28,7 @@ namespace TweetsAnalysis.Test
 
             var totalTweetsReceived = Context.TotalTweetsReceiveds.FirstOrDefault()?.TotalTweets;
 
-            await Context.TweetRawDatas.AddAsync(new Data.Models.TweetRawData { DateTimeTweet = DateTime.Now, Content = "CalculateTotalTweetsReceived_Test_1" });
+            await Context.TweetRawDatas.AddAsync(new Data.Models.TweetRawData { CreatedTime = DateTime.Now, Text = "CalculateTotalTweetsReceived_Test_1", Id = Guid.NewGuid().ToString() });
             await Context.SaveChangesAsync();
 
             await _service.CalculateTotalTweetsReceived();
@@ -51,7 +51,7 @@ namespace TweetsAnalysis.Test
 
             var totalTweetsReceived = Context.TotalTweetsReceiveds.FirstOrDefault().TotalTweets;
 
-            await Context.TweetRawDatas.AddAsync(new Data.Models.TweetRawData { DateTimeTweet = DateTime.Now, Content = "CalculateTotalTweetsReceived_Test_2" });
+            await Context.TweetRawDatas.AddAsync(new Data.Models.TweetRawData { CreatedTime = DateTime.Now, Text = "CalculateTotalTweetsReceived_Test_2" , Id = Guid.NewGuid().ToString()});
             await Context.SaveChangesAsync();
 
             await _service.CalculateTotalTweetsReceived();

@@ -11,7 +11,7 @@ namespace TweetsAnalysis.Test
         public TestBase()
         {
             options = new DbContextOptionsBuilder<TweetsAnalysisDbContext>()
-                            .UseInMemoryDatabase(databaseName: "TweetsAnalysisDbTest")
+                            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                             .Options;
 
             var initContext = new TweetsAnalysisDbContext(options);

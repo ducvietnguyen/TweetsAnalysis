@@ -6,10 +6,10 @@ namespace TweetsAnalysis.Test
     [TestClass]
     public class TweetRawDataServiceTest : TestBase
     {
-        private ITweetRawDataService _tweetRawDataService;
+        private  ITweetRawDataService _tweetRawDataService;
         public TweetRawDataServiceTest() : base()
         {
-
+           
         }
 
         [TestInitialize]
@@ -24,15 +24,15 @@ namespace TweetsAnalysis.Test
         {
             var dateTweet = DateTime.Now;
 
-            var newRawData = new TweetRawData { Content = "CreateMultiTweetRowDatas Some content", DateTimeTweet = dateTweet };
+            var newRawData = new TweetRawData { Text = "CreateMultiTweetRowDatas Some content", CreatedTime = dateTweet, Id = Guid.NewGuid().ToString() };
 
             await _tweetRawDataService.CreateMultiTweetRowDatas(new List<TweetRawData> { newRawData });
             await _tweetRawDataService.SaveChanges();
 
-            var inserted = (await _tweetRawDataService.GetAllTweetRowData()).Where(m => m.DateTimeTweet == dateTweet);
+            var inserted = (await _tweetRawDataService.GetAllTweetRowData()).Where(m => m.CreatedTime == dateTweet);
 
             Assert.AreEqual(1, inserted.Count());
-            Assert.AreEqual("CreateMultiTweetRowDatas Some content", inserted.First().Content);
+            Assert.AreEqual("CreateMultiTweetRowDatas Some content", inserted.First().Text);
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace TweetsAnalysis.Test
         {
             var dateTweet = DateTime.Now;
 
-            var newRawData = new TweetRawData { Content = "GetAllTweetRowData Some content", DateTimeTweet = dateTweet };
+            var newRawData = new TweetRawData { Text = "GetAllTweetRowData Some content", CreatedTime = dateTweet , Id = Guid.NewGuid().ToString() };
 
             await _tweetRawDataService.CreateMultiTweetRowDatas(new List<TweetRawData> { newRawData });
 

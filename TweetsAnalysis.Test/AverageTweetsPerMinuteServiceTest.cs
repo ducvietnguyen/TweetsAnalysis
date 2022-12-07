@@ -126,32 +126,38 @@ namespace TweetsAnalysis.Test
 
             var newRawData = new List<TweetRawData> {
                 new TweetRawData {
-                    Content = "CalculateAverageTweetsPerMinute_Test 1",
-                    DateTimeTweet = dateTweet
+                    Text = "CalculateAverageTweetsPerMinute_Test 1",
+                    CreatedTime = dateTweet,
+                    Id = Guid.NewGuid().ToString()
     },
                 new TweetRawData {
-                    Content = "CalculateAverageTweetsPerMinute_Test 2",
-                    DateTimeTweet = dateTweet
+                    Text = "CalculateAverageTweetsPerMinute_Test 2",
+                    CreatedTime = dateTweet,
+                    Id = Guid.NewGuid().ToString()
 },
                 new TweetRawData
                 {
-                    Content = "CalculateAverageTweetsPerMinute_Test 3",
-                    DateTimeTweet = dateTweet
+                    Text = "CalculateAverageTweetsPerMinute_Test 3",
+                    CreatedTime = dateTweet,
+                    Id = Guid.NewGuid().ToString()
                 },
                 new TweetRawData
                 {
-                    Content = "CalculateAverageTweetsPerMinute_Test 4",
-                    DateTimeTweet = dateTweet.AddMinutes(-1)
+                    Text = "CalculateAverageTweetsPerMinute_Test 4",
+                    CreatedTime = dateTweet.AddMinutes(-1),
+                    Id = Guid.NewGuid().ToString()
                 },
                 new TweetRawData
                 {
-                    Content = "CalculateAverageTweetsPerMinute_Test 5",
-                    DateTimeTweet = dateTweet.AddMinutes(-2)
+                    Text = "CalculateAverageTweetsPerMinute_Test 5",
+                    CreatedTime = dateTweet.AddMinutes(-2),
+                    Id = Guid.NewGuid().ToString()
                 },
                 new TweetRawData
                 {
-                    Content = "CalculateAverageTweetsPerMinute_Test 6",
-                    DateTimeTweet = dateTweet.AddMinutes(-3)
+                    Text = "CalculateAverageTweetsPerMinute_Test 6",
+                    CreatedTime = dateTweet.AddMinutes(-3),
+                    Id = Guid.NewGuid().ToString()
                 }
             };
 

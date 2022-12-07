@@ -14,14 +14,14 @@ namespace TweetsAnalysis.Data.Service
         public async Task CalculateAverageTweetsPerMinute(DateTime datetimeFrom, DateTime dateTimeTo)
         {
 
-            var rawData = await _context.TweetRawDatas.AsNoTracking().Where(p => p.DateTimeTweet >= datetimeFrom && p.DateTimeTweet <= dateTimeTo).ToListAsync();
+            var rawData = await _context.TweetRawDatas.AsNoTracking().Where(p => p.CreatedTime >= datetimeFrom && p.CreatedTime <= dateTimeTo).ToListAsync();
 
             if (!rawData.Any())
                 return;
 
             var totalTweets = rawData.Count();
 
-            var dateRange = rawData.Select(m => m.DateTimeTweet);
+            var dateRange = rawData.Select(m => m.CreatedTime);
 
             var maxDate = dateRange.Max();
             var minDate = dateRange.Min();
@@ -54,7 +54,7 @@ namespace TweetsAnalysis.Data.Service
 
         public async Task<AverageTweetsPerMinute> GetAverageTweetsPerMinuteByDate(DateTime dateTime)
         {
-            return await _context.AverageTweetsPerMinutes.FirstOrDefaultAsync(m => m.Date == dateTime);
+            return await _context.AverageTweetsPerMinutes.FirstOrDefaultAsync(m => m.Date == dateTime.Date);
         }
 
         public async Task<int> GetAverageTweetsPerMinuteAllOfTime()

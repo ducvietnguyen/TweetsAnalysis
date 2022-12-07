@@ -59,7 +59,7 @@ namespace TweetsAnalysis.Data.Service
 
                 var totalTweets = tweetRawData.Count();
 
-                var maxDate = tweetRawData.Select(m => m.DateTimeTweet).Max();
+                var maxDate = tweetRawData.Select(m => m.CreatedTime).Max();
 
                 var newTotalTweetsReceived = new TotalTweetsReceived { LatestDateCalculate = maxDate, TotalTweets = totalTweets };
 
@@ -69,10 +69,10 @@ namespace TweetsAnalysis.Data.Service
             }
             else
             {
-                var tweetRawData = await _context.TweetRawDatas.AsNoTracking().Where(p => p.DateTimeTweet > totalTweetsReceived.LatestDateCalculate).ToListAsync();
+                var tweetRawData = await _context.TweetRawDatas.AsNoTracking().Where(p => p.CreatedTime > totalTweetsReceived.LatestDateCalculate).ToListAsync();
                 var totalTweets = tweetRawData.Count();
 
-                var maxDate = tweetRawData.Select(m => m.DateTimeTweet).Max();
+                var maxDate = tweetRawData.Select(m => m.CreatedTime).Max();
 
                 totalTweetsReceived.LatestDateCalculate = maxDate;
                 totalTweetsReceived.TotalTweets = totalTweetsReceived.TotalTweets + totalTweets;

@@ -1,12 +1,12 @@
 ﻿using TweetsAnalysis.Data.Service;
 
-public class BackgroundWorkerService : BackgroundService
+public class CalculateBackgroundWorkerService : BackgroundService
 {
     private readonly ILogger<BackgroundService> _logger;
     private readonly IAverageTweetsPerMinuteService _averageTweetsPerMinuteService;
     private readonly ITotalTweetsReceivedService _totalTweetsReceivedService;
 
-    public BackgroundWorkerService(ILogger<BackgroundService> logger,
+    public CalculateBackgroundWorkerService(ILogger<BackgroundService> logger,
         IServiceScopeFactory factory)
     {
         _logger = logger;
@@ -29,7 +29,7 @@ public class BackgroundWorkerService : BackgroundService
             // Calculate total of tweets received
             await _totalTweetsReceivedService.CalculateTotalTweetsReceived();
 
-            // Run the background worker each 5 second.
+            // Run the calculate background worker each 5 second.
             await Task.Delay(5000, stoppingToken);
         }
     }

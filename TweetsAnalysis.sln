@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetsAnalysis.API", "Tweet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetsAnalysis.Test", "TweetsAnalysis.Test\TweetsAnalysis.Test.csproj", "{0857AFD3-2DCC-4377-B0FF-9E5707013871}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetsAnalysis.Common", "TweetsAnalysis.Common\TweetsAnalysis.Common.csproj", "{9BBA557C-161E-4B06-88F8-8F91FCA9AB0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0857AFD3-2DCC-4377-B0FF-9E5707013871}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0857AFD3-2DCC-4377-B0FF-9E5707013871}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0857AFD3-2DCC-4377-B0FF-9E5707013871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBA557C-161E-4B06-88F8-8F91FCA9AB0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBA557C-161E-4B06-88F8-8F91FCA9AB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBA557C-161E-4B06-88F8-8F91FCA9AB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBA557C-161E-4B06-88F8-8F91FCA9AB0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
