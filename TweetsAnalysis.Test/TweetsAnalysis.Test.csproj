@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TweetsAnalysis.Data\TweetsAnalysis.Data.csproj" />
-    <ProjectReference Include="..\TweetsAnalysis.Services\TweetsAnalysis.Services.csproj" />
   </ItemGroup>
 
 </Project>
