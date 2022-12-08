@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using TweetsAnalysis.API;
 using TweetsAnalysis.API.Consumer;
 using TweetsAnalysis.Data.Models;
@@ -20,6 +21,13 @@ builder.Services.AddScoped<ITotalTweetsReceivedService, TotalTweetsReceivedServi
 builder.Services.AddScoped<IAverageTweetsPerMinuteService, AverageTweetsPerMinuteService>();
 
 builder.Services.AddScoped<ITwitterConsumer, TwitterConsumer>();
+
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.FromLogContext()
+  .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 
