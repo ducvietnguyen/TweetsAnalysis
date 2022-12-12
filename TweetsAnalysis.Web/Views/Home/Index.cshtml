@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+ <script type="text/javascript">     
+
+$(document).ready(function() { 
+     setInterval(PopulateData, 1000);
+});
+
+function PopulateData() {
+    PopulateTotalTweetsReceived();
+    PopulateAverageTweetsPerMinute();
+}
+
+function PopulateTotalTweetsReceived() {
+    $.ajax({
+                type: 'GET',
+                url: '/Home/GetTotalTweetsReceived',
+                data: {},
+                success: function (data) {
+                    $('#totalTweetsReceived').text(data.totalTweetsReceived);
+                }
+            });
+}
+
+function PopulateAverageTweetsPerMinute() {
+    $.ajax({
+                type: 'GET',
+                url: '/Home/GetAverageTweetsPerMinute',
+                data: {},
+                success: function (data) {
+                    $('#averageTweetsPerMinute').text(data.averageTweetsPerMinute);
+                }
+            });
+}
+
+</script>
+
+<div class="text-center">
+    <span> <label class="display-2">Total tweets received:</label>&nbsp&nbsp<label id="totalTweetsReceived" class="display-2 fw-bold"/></span>
+    <br />
+   <span> <label class="display-2">Average tweets per minute:  </label>&nbsp&nbsp<label id="averageTweetsPerMinute" class="display-2 fw-bold"></label></span>
+</div>

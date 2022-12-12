@@ -7,29 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Controllers\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TweetsAnalysis.Common\TweetsAnalysis.Common.csproj" />
     <ProjectReference Include="..\TweetsAnalysis.Data\TweetsAnalysis.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Controllers\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Controllers\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Controllers\Index.cshtml" />
   </ItemGroup>
 
 </Project>
