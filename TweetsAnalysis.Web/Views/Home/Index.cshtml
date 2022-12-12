@@ -2,47 +2,61 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script src="~/js/twitter.js"></script>
 
- <script type="text/javascript">     
+<script type="text/javascript">
 
-// other option: Can use signalr to see real time data.
+    // other option: Can use signalr to see real time data.
 
-$(document).ready(function() {
-    
-     setInterval(PopulateData, 1000);
-});
+    //$(document).ready(function() {
 
-function PopulateData() {
-    PopulateTotalTweetsReceived();
-    PopulateAverageTweetsPerMinute();
-}
+    //    setInterval(PopulateData, 1000);
+    //});
 
-function PopulateTotalTweetsReceived() {
-    $.ajax({
-                type: 'GET',
-                url: '/Home/GetTotalTweetsReceived',
-                data: {},
-                success: function (data) {
-                    $('#totalTweetsReceived').text(data.totalTweetsReceived);
-                }
-            });
-}
+    //function PopulateData() {
+    //    PopulateTotalTweetsReceived();
+    //    PopulateAverageTweetsPerMinute();
+    //}
 
-function PopulateAverageTweetsPerMinute() {
-    $.ajax({
-                type: 'GET',
-                url: '/Home/GetAverageTweetsPerMinute',
-                data: {},
-                success: function (data) {
-                    $('#averageTweetsPerMinute').text(data.averageTweetsPerMinute);
-                }
-            });
-}
+    //function PopulateTotalTweetsReceived() {
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: '/Home/GetTotalTweetsReceived',
+    //        data: {},
+    //        success: function(data) {
+    //            $('#totalTweetsReceived').text(data.totalTweetsReceived);
+    //        }
+    //    });
+    //}
+
+    //function PopulateAverageTweetsPerMinute() {
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: '/Home/GetAverageTweetsPerMinute',
+    //        data: {},
+    //        success: function(data) {
+    //            $('#averageTweetsPerMinute').text(data.averageTweetsPerMinute);
+    //        }
+    //    });
+    //}
 
 </script>
 
 <div class="text-center">
-    <span> <label class="display-2">Total tweets received:</label>&nbsp&nbsp<label id="totalTweetsReceived" class="display-2 fw-bold"/></span>
+    <span> <label class="display-2">Total tweets received:</label>&nbsp&nbsp<label id="totalTweetsReceived" class="display-2 fw-bold" /></span>
     <br />
-   <span> <label class="display-2">Average tweets per minute:  </label>&nbsp&nbsp<label id="averageTweetsPerMinute" class="display-2 fw-bold"></label></span>
+    <label class="display-2">Average tweets per minute: </label>
+     <br />
+    <div class="row">        
+        <div class="col-12">
+            <canvas id="averageTweetPerMinuteCanvas"></canvas>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-12">
+            <label style="color:red" id="errorMessage"></label>
+        </div>
+    </div>
 </div>
+
+
