@@ -27,7 +27,7 @@ namespace TweetsAnalysis.Web
                 {
                     var tweetCount = await _totalTweetsReceivedService.GetTotalTweetsReceived();
                     var averageTweetPerMinute = await _averageTweetsPerMinuteService.GetAverageTweetsPerMinuteAllOfTime();
-                    await _hub.Clients.All.ReceiveTweetsAnalytic(10, 20);
+                    await _hub.Clients.All.ReceiveTweetsAnalytic(tweetCount, averageTweetPerMinute);
 
                 }
                 catch (Exception ex)
