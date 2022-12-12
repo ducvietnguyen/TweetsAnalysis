@@ -31,7 +31,7 @@ namespace TweetsAnalysis.Data.Service
 
             var datetimeAverageTweetsCalculated = new DateTime(datetimeFrom.Year, datetimeFrom.Month, datetimeFrom.Day);
 
-            var averageTweetsPerMinuteObj = await GetAverageTweetsPerMinuteByDate(datetimeAverageTweetsCalculated);
+            var averageTweetsPerMinuteObj = await _context.AverageTweetsPerMinutes.FirstOrDefaultAsync(m => m.Date == datetimeAverageTweetsCalculated);
 
             var averageTweets = Convert.ToInt32(Math.Round(totalTweets / totalMinutes));
 
@@ -52,9 +52,10 @@ namespace TweetsAnalysis.Data.Service
             }
         }
 
-        public async Task<AverageTweetsPerMinute> GetAverageTweetsPerMinuteByDate(DateTime dateTime)
+        public async Task<int> GetAverageTweetsPerMinuteByDate(DateTime dateTime)
         {
-            return await _context.AverageTweetsPerMinutes.FirstOrDefaultAsync(m => m.Date == dateTime.Date);
+            var averageTweetsPerMinutes = await _context.AverageTweetsPerMinutes.FirstOrDefaultAsync(m => m.Date == dateTime.Date);
+            return averageTweetsPerMinutes?.AverageTweets ?? 0;
         }
 
         public async Task<int> GetAverageTweetsPerMinuteAllOfTime()

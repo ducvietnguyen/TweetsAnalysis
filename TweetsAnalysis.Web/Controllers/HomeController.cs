@@ -46,7 +46,7 @@ namespace TweetsAnalysis.Web.Controllers
         public async Task<JsonResult> GetTotalTweetsReceived()
         {
             var totalTweetsReceived = await _totalTweetsReceivedService.GetTotalTweetsReceived();
-            return Json(new { totalTweetsReceived = totalTweetsReceived != null ? totalTweetsReceived.TotalTweets : 0 });
+            return Json(new { totalTweetsReceived = totalTweetsReceived});
         }
     }
 }

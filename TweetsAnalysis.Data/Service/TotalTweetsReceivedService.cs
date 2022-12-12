@@ -21,10 +21,10 @@ namespace TweetsAnalysis.Data.Service
             _context.TotalTweetsReceiveds.AddAsync(entity);
         }
 
-        public async Task<TotalTweetsReceived> GetTotalTweetsReceived()
+        public async Task<int> GetTotalTweetsReceived()
         {
             var totalTweetsReceivedObj = await _context.TotalTweetsReceiveds.FirstOrDefaultAsync();
-            return totalTweetsReceivedObj;
+            return totalTweetsReceivedObj?.TotalTweets ?? 0;
         }
 
         public async Task UpdateTotalTweetsReceived(TotalTweetsReceived updateEntity)
@@ -47,7 +47,7 @@ namespace TweetsAnalysis.Data.Service
 
         public async Task CalculateTotalTweetsReceived()
         {
-            var totalTweetsReceived = await GetTotalTweetsReceived();
+            var totalTweetsReceived = await _context.TotalTweetsReceiveds.FirstOrDefaultAsync();
 
             if (totalTweetsReceived == null)
             {

@@ -43,6 +43,7 @@ using TweetsAnalysis.Web.Consumer;
 
                             try
                             {
+                            // Store to database.
                                 await _tweetRawDataService.CreateMultiTweetRowDatas(tweetRawDatas);
                                 await _tweetRawDataService.SaveChanges();
                             }

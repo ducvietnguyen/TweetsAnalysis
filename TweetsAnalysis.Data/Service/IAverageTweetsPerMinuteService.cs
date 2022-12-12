@@ -4,7 +4,7 @@ namespace TweetsAnalysis.Data.Service
 {
     public interface IAverageTweetsPerMinuteService
     {
-        Task<AverageTweetsPerMinute> GetAverageTweetsPerMinuteByDate(DateTime dateTime);
+        Task<int> GetAverageTweetsPerMinuteByDate(DateTime dateTime);
         Task CalculateAverageTweetsPerMinute(DateTime datetimeFrom, DateTime dateTimeTo);
         Task<int> GetAverageTweetsPerMinuteAllOfTime();
     }

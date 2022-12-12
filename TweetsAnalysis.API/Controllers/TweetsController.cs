@@ -24,7 +24,7 @@ namespace TweetsAnalysis.API.Controllers
 
         [HttpGet]
         [Route(nameof(GetTotalNumberOfTweetsReceived))]
-        public async Task<TotalTweetsReceived> GetTotalNumberOfTweetsReceived()
+        public async Task<int> GetTotalNumberOfTweetsReceived()
         {
             return await _totalTweetsReceivedService.GetTotalTweetsReceived();
         }
@@ -40,7 +40,7 @@ namespace TweetsAnalysis.API.Controllers
 
         [HttpGet]
         [Route(nameof(GetAverageTweetsPerMinuteByDate))]
-        public async Task<AverageTweetsPerMinute> GetAverageTweetsPerMinuteByDate(DateTime dateTime)
+        public async Task<int> GetAverageTweetsPerMinuteByDate(DateTime dateTime)
         {
             var result = await _averageTweetsPerMinuteService.GetAverageTweetsPerMinuteByDate(dateTime);
 

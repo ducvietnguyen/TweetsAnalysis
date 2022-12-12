@@ -5,7 +5,7 @@ namespace TweetsAnalysis.Data.Service
     public interface ITotalTweetsReceivedService
     {
         Task<bool> SaveChanges();
-        Task<TotalTweetsReceived> GetTotalTweetsReceived();
+        Task<int> GetTotalTweetsReceived();
         Task CreateTotalTweetsReceived(TotalTweetsReceived entity);
 
         Task UpdateTotalTweetsReceived(TotalTweetsReceived updateEntity);

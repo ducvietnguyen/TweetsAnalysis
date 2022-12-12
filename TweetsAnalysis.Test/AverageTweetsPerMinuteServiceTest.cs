@@ -89,7 +89,7 @@ namespace TweetsAnalysis.Test
             var averageTweetsPerMinute = await _service.GetAverageTweetsPerMinuteByDate(DateTime.Today);
 
             Assert.AreNotEqual(null, averageTweetsPerMinute);
-            Assert.AreEqual(12, averageTweetsPerMinute.AverageTweets);
+            Assert.AreEqual(12, averageTweetsPerMinute);
         }
 
         [TestMethod]
