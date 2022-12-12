@@ -5,7 +5,9 @@ Visual Studio 2022, Net 6 Installed
 
 ## Run guide
 * Replace ClientID and ClientSecret in appsettings.json
-* Set project **TweetsAnalysis.API** as start up project and run the appication.
+* Set project **TweetsAnalysis.Web** as start up project and run the appication.
+![image](https://user-images.githubusercontent.com/9100918/206956972-071313cb-f462-4aa2-949f-f2f62e96431b.png)
+
 
 ## API
 * Execute **GetTotalNumberOfTweetsReceived** to get the total number of tweets received.
