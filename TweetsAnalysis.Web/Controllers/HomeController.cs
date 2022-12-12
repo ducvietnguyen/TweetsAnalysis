@@ -37,16 +37,5 @@ namespace TweetsAnalysis.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<JsonResult> GetAverageTweetsPerMinute()
-        {
-            var averageTweetsPerMinute = await _averageTweetsPerMinuteService.GetAverageTweetsPerMinuteAllOfTime();
-            return Json(new { averageTweetsPerMinute = averageTweetsPerMinute });
-        }
-
-        public async Task<JsonResult> GetTotalTweetsReceived()
-        {
-            var totalTweetsReceived = await _totalTweetsReceivedService.GetTotalTweetsReceived();
-            return Json(new { totalTweetsReceived = totalTweetsReceived});
-        }
     }
 }
