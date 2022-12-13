@@ -18,7 +18,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<CalculateBackgroundWorkerService>();
 builder.Services.AddHostedService<GetTweetBackgroundWorker>();
