@@ -4,18 +4,15 @@ using TweetsAnalysis.Common;
 using TweetsAnalysis.Data.Models;
 using TweetsAnalysis.Data.Service;
 using TweetsAnalysis.Web.Consumer;
-using TweetsAnalysis.Web.Hubs;
 
 public class GetTweetBackgroundWorker : BackgroundService
 {
     private readonly ILogger<GetTweetBackgroundWorker> _logger;
     private readonly ITweetRawDataService _tweetRawDataService;
     private readonly ITwitterConsumer _twitterConsumer;
-    private readonly IHubContext<TwitterAnalysisHub, ITwitterAnalysisHub> _hub;
-    public GetTweetBackgroundWorker(ILogger<GetTweetBackgroundWorker> logger, IServiceScopeFactory factory, IHubContext<TwitterAnalysisHub, ITwitterAnalysisHub> hub)
+    public GetTweetBackgroundWorker(ILogger<GetTweetBackgroundWorker> logger, IServiceScopeFactory factory)
     {
         _logger = logger;
-        _hub = hub;
         _tweetRawDataService = factory.CreateScope().ServiceProvider.GetRequiredService<ITweetRawDataService>();
         _twitterConsumer = factory.CreateScope().ServiceProvider.GetRequiredService<ITwitterConsumer>();
     }
@@ -60,9 +57,7 @@ public class GetTweetBackgroundWorker : BackgroundService
         }
         catch (Exception ex)
         {
-
             _logger.LogError(ex, "Failed to get twitter stream");
-            await _hub.Clients.All.ReceiveError($"Failed to get twitter stream data: {ex.Message}");
         }
     }
 }

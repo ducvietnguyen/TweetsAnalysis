@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using TweetsAnalysis.Data.Models;
 
 namespace TweetsAnalysis.Web.Consumer
@@ -15,47 +16,54 @@ namespace TweetsAnalysis.Web.Consumer
 
             //setup reusable http client
             _client = new HttpClient();
-            Uri baseUri = new Uri(_configuration.GetValue<string>("Twitter:BaseUrl"));
+            Uri baseUri = new Uri(_configuration.GetValue<string>("TwitterSettings:BaseUrl"));
             _client.BaseAddress = baseUri;
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public async Task RefreshTokenAsync()
+        /// <summary>
+        /// Get token
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetTokenAsync()
         {
-            var clientId = _configuration.GetValue<string>("Twitter:ClientId");
-            var clientSecret = _configuration.GetValue<string>("Twitter:ClientSecret");
+            var clientId = _configuration.GetValue<string>("TwitterSettings:ClientId");
+            var clientSecret = _configuration.GetValue<string>("TwitterSettings:ClientSecret");
             var authenticationString = $"{clientId}:{clientSecret}";
-            var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
+            var encodedAuthentication = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
 
             // Post body content
-            var values = new List<KeyValuePair<string, string>>();
-            values.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
-            var content = new FormUrlEncodedContent(values);
+            var urlContent = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("grant_type", "client_credentials")
+            };
+
+            var content = new FormUrlEncodedContent(urlContent);
 
             // Add authentication header
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/oauth2/token");
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString);
-            requestMessage.Content = content;
+            var request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/token");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", encodedAuthentication);
+            request.Content = content;
 
-            var responseMessage = await _client.SendAsync(requestMessage);
+            var responseMessage = await _client.SendAsync(request);
             responseMessage.EnsureSuccessStatusCode();
 
             var body = await responseMessage.Content.ReadFromJsonAsync<TokenModel>();
-            _token = body?.AccessToken;
+            return body?.AccessToken;
         }
 
 
         public async Task<Stream> GetStreamAsync()
         {
-            // Get authentication token
+            // Get token
             if (_token == null)
             {
-                await RefreshTokenAsync();
+                _token = await GetTokenAsync();
             }
 
             var client = new HttpClient();
-            Uri baseUri = new Uri(_configuration.GetValue<string>("Twitter:BaseUrl"));
+            Uri baseUri = new Uri(_configuration.GetValue<string>("TwitterSettings:BaseUrl"));
             client.BaseAddress = baseUri;
             // Add authentication header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);

@@ -2,23 +2,45 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script src="~/js/twitter.js"></script>
+<script type="text/javascript">
 
+     ///other option: Can use signalr to see real time data.
+
+    $(document).ready(function() {
+        setInterval(PopulateData, 1000);
+    });
+    function PopulateData() {
+        PopulateTotalTweetsReceived();
+        PopulateAverageTweetsPerMinute();
+    }
+    function PopulateTotalTweetsReceived() {
+        $.ajax({
+            type: 'GET',
+            url: '/Home/GetTotalTweetsReceived',
+            data: {},
+            success: function(data) {
+                $('#totalTweetsReceived').text(data.totalTweetsReceived);
+            }
+        });
+    }
+    function PopulateAverageTweetsPerMinute() {
+        $.ajax({
+            type: 'GET',
+            url: '/Home/GetAverageTweetsPerMinute',
+            data: {},
+            success: function(data) {
+                $('#averageTweetsPerMinute').text(data.averageTweetsPerMinute);
+            }
+        });
+    }
+</script>
 <div class="text-center">
-    <span> <label class="display-2">Total tweets received:</label>&nbsp&nbsp<label id="totalTweetsReceived" class="display-2 fw-bold" /></span>
+    <label class="">Data will be refreshed each one second. If the total tweets received or average tweets per minute is zero, please check log in folder <b>\TweetsAnalysis\TweetsAnalysis.Web\Logs</b> to find the rootcause.</label>
     <br />
-    <label class="display-2">Average tweets per minute: </label>
-     <br />
-    <div class="row">        
-        <div class="col-12">
-            <canvas id="averageTweetPerMinuteCanvas"></canvas>
-        </div>
-    </div>
-    <div class="row">        
-        <div class="col-12">
-            <label style="color:red" id="errorMessage"></label>
-        </div>
-    </div>
+    <span> <label class="display-4">Total tweets received:</label>&nbsp&nbsp<label id="totalTweetsReceived" class="display-3 fw-bold" /></span>
+    <br />
+    <span> <label class="display-4">Average tweets per minute:</label>&nbsp&nbsp<label id="averageTweetsPerMinute" class="display-3 fw-bold" /></span>
+   
 </div>
 
 

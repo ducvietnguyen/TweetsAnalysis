@@ -5,7 +5,6 @@ using TweetsAnalysis.Data.Models;
 using TweetsAnalysis.Data.Service;
 using TweetsAnalysis.Web;
 using TweetsAnalysis.Web.Consumer;
-using TweetsAnalysis.Web.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +22,6 @@ builder.Services.AddSignalR();
 
 builder.Services.AddHostedService<CalculateBackgroundWorkerService>();
 builder.Services.AddHostedService<GetTweetBackgroundWorker>();
-builder.Services.AddHostedService<PopulateTweetAnalyticWorker>();
 
 builder.Services.AddDbContext<TweetsAnalysisDbContext>(opt => opt.UseInMemoryDatabase("TweetsAnalysisDatabase"));
 
@@ -56,5 +54,4 @@ app.UseRouting();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapHub<TwitterAnalysisHub>("/twitterAnalysisHub");
 app.Run();
