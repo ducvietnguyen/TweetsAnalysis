@@ -15,9 +15,11 @@ namespace TweetsAnalysis.Web.Consumer
             _configuration = configuration;
 
             //setup reusable http client
-            _client = new HttpClient();
             Uri baseUri = new Uri(_configuration.GetValue<string>("TwitterSettings:BaseUrl"));
-            _client.BaseAddress = baseUri;
+            _client = new HttpClient
+            {
+                BaseAddress = baseUri
+            };
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.ConnectionClose = true;
         }
