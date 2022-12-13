@@ -38,7 +38,6 @@ public class GetTweetBackgroundWorker : BackgroundService
 
                     if (consumerData.Any())
                     {
-                        // save to db
                         var tweetRawDatas = consumerData.Select(m => m.Data).ToList();
 
                         try

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using TweetsAnalysis.Data.Models;
 
 namespace TweetsAnalysis.Web.Consumer
@@ -32,18 +31,16 @@ namespace TweetsAnalysis.Web.Consumer
         {
             var clientId = _configuration.GetValue<string>("TwitterSettings:ClientId");
             var clientSecret = _configuration.GetValue<string>("TwitterSettings:ClientSecret");
-            var authenticationString = $"{clientId}:{clientSecret}";
-            var encodedAuthentication = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
-
-            // Post body content
+            
+            var encodedAuthentication = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}"));
+           
             var urlContent = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("grant_type", "client_credentials")
             };
 
             var content = new FormUrlEncodedContent(urlContent);
-
-            // Add authentication header
+           
             var request = new HttpRequestMessage(HttpMethod.Post, "/oauth2/token");
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", encodedAuthentication);
             request.Content = content;

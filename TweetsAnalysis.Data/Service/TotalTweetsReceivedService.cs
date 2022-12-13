@@ -18,7 +18,7 @@ namespace TweetsAnalysis.Data.Service
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            _context.TotalTweetsReceiveds.AddAsync(entity);
+            await _context.TotalTweetsReceiveds.AddAsync(entity);
         }
 
         public async Task<int> GetTotalTweetsReceived()
@@ -69,7 +69,10 @@ namespace TweetsAnalysis.Data.Service
             }
             else
             {
-                var tweetRawData = await _context.TweetRawDatas.AsNoTracking().Where(p => p.CreatedTime > totalTweetsReceived.LatestDateCalculate).ToListAsync();
+                var tweetRawData = await _context.TweetRawDatas.AsNoTracking()
+                    .Where(p => p.CreatedTime > totalTweetsReceived.LatestDateCalculate)
+                    .ToListAsync();
+
                 var totalTweets = tweetRawData.Count();
 
                 var maxDate = tweetRawData.Select(m => m.CreatedTime).Max();
