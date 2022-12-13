@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TweetsAnalysis.Data.Models;
 using TweetsAnalysis.Data.Service;
 using TweetsAnalysis.Web.Models;
 
@@ -39,14 +40,32 @@ namespace TweetsAnalysis.Web.Controllers
 
         public async Task<JsonResult> GetAverageTweetsPerMinute()
         {
-            var averageTweetsPerMinute = await _averageTweetsPerMinuteService.GetAverageTweetsPerMinuteAllOfTime();
-            return Json(new { averageTweetsPerMinute = averageTweetsPerMinute });
+            try
+            {
+                var averageTweetsPerMinute = await _averageTweetsPerMinuteService.GetAverageTweetsPerMinuteAllOfTime();
+                return Json(new { averageTweetsPerMinute = averageTweetsPerMinute });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Fail to  get average tweets per minute");
+                return Json(new { averageTweetsPerMinute = 0 });
+            }
+           
         }
 
         public async Task<JsonResult> GetTotalTweetsReceived()
         {
-            var totalTweetsReceived = await _totalTweetsReceivedService.GetTotalTweetsReceived();
-            return Json(new { totalTweetsReceived = totalTweetsReceived });
+            try
+            {
+                var totalTweetsReceived = await _totalTweetsReceivedService.GetTotalTweetsReceived();
+                return Json(new { totalTweetsReceived = totalTweetsReceived });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Fail to  get total tweets received");
+                return Json(new { totalTweetsReceived = 0 });
+            }
+           
         }
 
     }
