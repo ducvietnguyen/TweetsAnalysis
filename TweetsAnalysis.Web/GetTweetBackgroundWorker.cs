@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System.Text;
+﻿using System.Text;
 using TweetsAnalysis.Common;
 using TweetsAnalysis.Data.Models;
 using TweetsAnalysis.Data.Service;
